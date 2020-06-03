@@ -38,6 +38,8 @@ public class MCManhunt extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new MCManhuntEvent(this), this);
 
+        runnerLocation = null;
+
         getLogger().info("MCManhunt has been enabled");
     }
 

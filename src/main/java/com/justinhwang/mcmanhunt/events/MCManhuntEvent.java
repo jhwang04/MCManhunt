@@ -35,17 +35,11 @@ public class MCManhuntEvent implements Listener {
                 }
             }
 
-            List<String> uuidList;
+            List<String> uuidList =  (List<String>) plugin.config.getList("hunterUUIDs");;
 
-            try {
-                uuidList = (List<String>) plugin.config.getList("hunterUUIDs");
-
-                for(String uuid : uuidList) {
-                    Player p = Bukkit.getPlayer(UUID.fromString(uuid));
-                    p.setCompassTarget(plugin.runnerLocation);
-                }
-            } catch (NullPointerException error) {
-                //do nothing
+            for(String uuid : uuidList) {
+                Player p = Bukkit.getPlayer(UUID.fromString(uuid));
+                p.setCompassTarget(plugin.runnerLocation);
             }
         }
     }

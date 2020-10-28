@@ -62,7 +62,7 @@ public class HuntersCommand implements CommandExecutor {
             plugin.config.set("hunterUUIDs", uuids);
 
         } else {
-            commandSender.sendMessage(ChatColor.RED + "Usage: /hunters <add/remove/clear>");
+            commandSender.sendMessage(ChatColor.RED + "Usage: /hunters <add/remove/clear/list>");
         }
 
         plugin.saveConfig();

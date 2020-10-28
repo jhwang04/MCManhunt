@@ -18,7 +18,8 @@ public class RunnerCommand implements CommandExecutor {
             plugin.config.set("runner", name);
             commandSender.sendMessage(ChatColor.GREEN + "The speedrunner has been set to " + name);
         } else {
-            commandSender.sendMessage(ChatColor.RED + "Usage: /runner <name of speedrunner>");
+            commandSender.sendMessage("Runner is currently set to " + plugin.config.get("runner"));
+            commandSender.sendMessage("To set a different one, use \"/runner <name of speedrunner>\"");
         }
         plugin.saveConfig();
         return true;

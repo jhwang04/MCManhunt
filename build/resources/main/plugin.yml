@@ -1,7 +1,7 @@
 name: MCManhunt
 main: com.justinhwang.mcmanhunt.MCManhunt
 version: 1.0.0
-api-version: 1.15
+api-version: 1.16
 commands:
   manhunt:
     permission: mcmanhunt

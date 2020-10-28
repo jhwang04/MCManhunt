@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,7 @@ public class MCManhunt extends JavaPlugin {
 
     public FileConfiguration config;
     public Location runnerLocation;
+    public Location lastRunnerLocationInDimension;
 
     @Override
     public void onEnable() {
@@ -30,7 +32,7 @@ public class MCManhunt extends JavaPlugin {
 
         getCommand("compass").setExecutor(new CompassCommand(this));
 
-        getCommand("setoverworld").setExecutor(new SetOverworldCommand(this));
+        getCommand("setmanhuntworld").setExecutor(new SetOverworldCommand(this));
 
         getCommand("hunters").setExecutor(new HuntersCommand(this));
 

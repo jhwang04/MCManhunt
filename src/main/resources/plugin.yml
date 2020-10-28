@@ -15,7 +15,7 @@ commands:
       - tracker
       - playertracker
       - playercompass
-  setoverworld:
+  setmanhuntworld:
     permission: mcmanhunt
     description: set the world that the minigame is occurring in
   hunters:

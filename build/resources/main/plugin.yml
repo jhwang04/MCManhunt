@@ -39,4 +39,4 @@ permissions:
     default: op
   mcmanhunt.compass:
     description: allows the user to give themselves a compass
-    default: op
+    default: true

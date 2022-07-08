@@ -27,6 +27,13 @@ public class HuntersCommand implements CommandExecutor {
             List<String> names = (List<String>) plugin.config.getList("hunters");
             List<String> uuids = (List<String>) plugin.config.getList("hunterUUIDs");
 
+            if(names == null || uuids == null) {
+                names = new ArrayList<String>();
+                uuids = new ArrayList<String>();
+                plugin.config.set("hunters", names);
+                plugin.config.set("hunterUUIDs", uuids);
+            }
+
             if(s1.equals("clear") || s1.equals("reset")) {
                 names = new ArrayList<String>();
                 uuids = new ArrayList<String>();

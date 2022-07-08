@@ -6,19 +6,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.PiglinBrute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPortalEnterEvent;
-import org.bukkit.event.entity.EntityPortalExitEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
-import sun.java2d.pipe.NullPipe;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static org.bukkit.Bukkit.getLogger;
 
 public class MCManhuntEvent implements Listener {
     public MCManhunt plugin;
@@ -93,5 +99,73 @@ public class MCManhuntEvent implements Listener {
         if(plugin.isPlayerHunter(p)) {
             plugin.giveCompass(p);
         }
+    }
+
+    @EventHandler
+    public void onBruteAggro(EntityTargetLivingEntityEvent e) {
+        Entity entity = e.getEntity();
+        if(entity instanceof PiglinBrute) {
+            if(!plugin.config.getBoolean("allowBrutes")) {
+                ((PiglinBrute) entity).remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPiglinTrade(PiglinBarterEvent e) {
+        if(!plugin.config.getBoolean("legacyTrades"))
+            return;
+
+        int n = (int) (Math.random() * 423);
+        ItemStack r = new ItemStack(Material.DIRT, 1);
+
+        if(n < 5) {
+            r = new ItemStack(Material.ENCHANTED_BOOK);
+            r.addEnchantment(Enchantment.SOUL_SPEED, randInt(3));
+        } else if(n < 13) {
+            r = new ItemStack(Material.IRON_BOOTS);
+            r.addEnchantment(Enchantment.SOUL_SPEED, randInt(3));
+        } else if(n < 23)
+            r = new ItemStack(Material.IRON_NUGGET, 9 + randInt(27));
+        else if(n < 33) {
+            r = new ItemStack(Material.POTION);
+            PotionMeta meta = (PotionMeta) r.getItemMeta();
+            meta.setBasePotionData(new PotionData(PotionType.FIRE_RESISTANCE, false, false));
+            r.setItemMeta(meta);
+        } else if(n < 43) {
+            r = new ItemStack(Material.SPLASH_POTION);
+            PotionMeta meta = (PotionMeta) r.getItemMeta();
+            meta.setBasePotionData(new PotionData(PotionType.FIRE_RESISTANCE, false, false));
+            r.setItemMeta(meta);
+        } else if(n < 63)
+            r = new ItemStack(Material.QUARTZ, 8 + randInt(8));
+        else if(n < 83)
+            r = new ItemStack(Material.GLOWSTONE_DUST, 4 + randInt(7));
+        else if(n < 103)
+            r = new ItemStack(Material.MAGMA_CREAM, 2 + randInt(4));
+        else if(n < 123)
+            r = new ItemStack(Material.ENDER_PEARL, 4 + randInt(4));
+        else if(n < 143)
+            r = new ItemStack(Material.STRING, 8 + randInt(16));
+        else if(n < 183)
+            r = new ItemStack(Material.FIRE_CHARGE, 1 + randInt(4));
+        else if(n < 223)
+            r = new ItemStack(Material.GRAVEL, 8 + randInt(8));
+        else if(n < 263)
+            r = new ItemStack(Material.LEATHER, 4 + randInt(6));
+        else if(n < 303)
+            r = new ItemStack(Material.NETHER_BRICK, 4 + randInt(12));
+        else if(n < 343)
+            r = new ItemStack(Material.OBSIDIAN, 1);
+        else if(n < 383)
+            r = new ItemStack(Material.CRYING_OBSIDIAN, 1 + randInt(2));
+        else if(n < 423)
+            r = new ItemStack(Material.SOUL_SAND, 4 + randInt(12));
+
+        e.getOutcome().set(0, r);
+    }
+
+    private int randInt(int max) {
+        return (int) (Math.random() * (max + 1));
     }
 }

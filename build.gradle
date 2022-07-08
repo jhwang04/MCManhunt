@@ -3,9 +3,9 @@ plugins {
 }
 
 group 'com.justinhwang'
-version '1.0'
+version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -22,10 +22,5 @@ repositories {
 }
 
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT'
-}
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs << '-Xlint:unchecked'
-    options.deprecation = true
+    implementation 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
 }

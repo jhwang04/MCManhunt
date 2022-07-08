@@ -8,5 +8,7 @@
 enabled: true
 overworld: world
 runner: jhwang04
+allowBrutes: false
+legacyTrades: true
 hunters:
 hunterUUIDs:
